@@ -33,10 +33,8 @@ Have similar features to standalone grpcwebproxy (structured logging, monitoring
 ## Proposed Caddyfile 
 
 ```
-{
 grpcweb.example.com 
 endpoint localhost:9090
-}
 ```
 
 The first line `grpcweb.example.com` is the hostname/address of the site to serve.
@@ -47,8 +45,13 @@ This server type leverage the [tls directive](https://caddyserver.com/docs/tls) 
 ## References ##
 
 [Writing a Plugin: Server Type](https://github.com/mholt/caddy/wiki/Writing-a-Plugin:-Server-Type)
+
 [Caddyfile](https://caddyserver.com/tutorial/caddyfile)
+
 [grpcwebproxy](https://github.com/improbable-eng/grpc-web/tree/master/go/grpcwebproxy)
+
 [gRPC-Web protocol](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md)
+
 [gRPC-Web: Moving past REST+JSON towards type-safe Web APIs](https://spatialos.improbable.io/games/grpc-web-moving-past-restjson-towards-type-safe-web-apis)
+
 
