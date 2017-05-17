@@ -1,4 +1,4 @@
-package netserver
+package grpcwebproxyserver
 
 import (
 	"fmt"
@@ -9,12 +9,12 @@ import (
 	"github.com/mholt/caddy/caddytls"
 )
 
-const serverType = "net"
+const serverType = "grpcwebproxy"
 
 // directives for the net server type
 // The ordering of this list is important, host need to be called before
 // tls to get the relevant hostname needed
-var directives = []string{"host", "tls"}
+var directives = []string{"endpoint", "tls"}
 
 func init() {
 	//flag.StringVar(&LocalTCPAddr, serverType+".localtcp", DefaultLocalTCPAddr, "Default local TCP Address")

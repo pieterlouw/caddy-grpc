@@ -1,4 +1,4 @@
-package netserver
+package grpcwebproxyserver
 
 import (
 	"fmt"
