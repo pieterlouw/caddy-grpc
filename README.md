@@ -18,7 +18,7 @@ To verify the plugin is part of your downloaded instance of Caddy, run Caddy wit
 
 `grpcwebproxy` should be listed under `Server types` along with `http` and any other server types also included.
 
-*Note, because the plugin is still in development it's not yet available on the Caddy build server*
+*Note, because the plugin is still in development it's not yet available on the Caddy download page*
 
 ## Running
 
