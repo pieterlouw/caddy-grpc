@@ -18,7 +18,7 @@ func activateTLS(cctx caddy.Context) error {
 		fmt.Print("Activating privacy features...")
 	}
 
-	ctx := cctx.(*netContext)
+	ctx := cctx.(*grpcwebproxyContext)
 
 	// 2. Sets the Managed field to true on all configs that should be fully managed
 	for _, cfg := range ctx.configs {
@@ -44,8 +44,8 @@ func activateTLS(cctx caddy.Context) error {
 			continue
 		}
 		cfg.TLS.Enabled = true
-		if caddytls.HostQualifies(cfg.Hostname) {
-			_, err := cfg.TLS.CacheManagedCertificate(cfg.Hostname)
+		if caddytls.HostQualifies(cfg.Host()) {
+			_, err := cfg.TLS.CacheManagedCertificate(cfg.Host())
 			if err != nil {
 				return err
 			}

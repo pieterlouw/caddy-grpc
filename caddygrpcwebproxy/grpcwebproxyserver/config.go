@@ -4,32 +4,28 @@ import "github.com/mholt/caddy/caddytls"
 
 // Config contains configuration details about a net server type
 type Config struct {
-	Type string
+	// The address of the site
+	Addr Address
 
-	// The hostname to be used for TLS configurations
-	Hostname string
-
-	// The port the server binds to and listens on
-	ListenPort string
+	// The hostname to bind listener to;
+	// defaults to Addr.Host
+	ListenHost string
 
 	// TLS configuration
 	TLS *caddytls.Config
-
-	Parameters []string
-	Tokens     map[string][]string
 }
 
-// TLSConfig returns c.TLS.
+// TLSConfig returns s.TLS.
 func (c Config) TLSConfig() *caddytls.Config {
 	return c.TLS
 }
 
-// Host returns c.Hostname
+// Host returns s.Addr.Host.
 func (c Config) Host() string {
-	return c.Hostname
+	return c.Addr.Host
 }
 
-// Port returns c.ListenPort
+// Port returns s.Addr.Port.
 func (c Config) Port() string {
-	return c.ListenPort
+	return c.Addr.Port
 }

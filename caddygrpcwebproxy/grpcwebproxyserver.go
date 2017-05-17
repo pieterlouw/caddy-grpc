@@ -2,7 +2,7 @@ package grpcwebproxyserver
 
 import (
 	// plug in the server
-	_ "github.com/pieterlouw/caddy-grpcwebproxy/grpcwebproxy/grpcwebproxyserver"
+	_ "github.com/pieterlouw/caddy-grpcwebproxy/caddygrpcwebproxy/grpcwebproxyserver"
 	// plug in the directives
-	_ "github.com/pieterlouw/caddy-grpcwebproxy/grpcwebproxy/endpoint"
+	//_ "github.com/pieterlouw/caddy-grpcwebproxy/caddygrpcwebproxy/endpoint"
 )
