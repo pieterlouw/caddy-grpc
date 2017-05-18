@@ -1,7 +1,6 @@
 package grpcwebproxy
 
 import (
-	"fmt"
 	"net/http"
 
 	context "golang.org/x/net/context"
@@ -79,10 +78,6 @@ func setup(c *caddy.Controller) error {
 	for _, upstream := range upstreams {
 		c.OnShutdown(upstream.Stop)
 	}*/
-
-	for c.Next() {
-		fmt.Println("grpcwebproxy setup:", c.Val())
-	}
 
 	httpserver.GetConfig(c).AddMiddleware(func(next httpserver.Handler) httpserver.Handler {
 		return server{next: next}
