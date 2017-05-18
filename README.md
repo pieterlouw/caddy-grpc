@@ -1,50 +1,45 @@
 # Caddy grpcwebproxy #
 
-*Note: This server type plugin is  currently still a work in progress (WIP).*
+*Note: This plugin is currently still a work in progress (WIP).*
 
-grpcwebproxy server type for [Caddy Server](https://github.com/mholt/caddy)
+grpcwebproxy plugin for [Caddy Server](https://github.com/mholt/caddy)
 
-The server type is meant to serve the same purpose as [grpcwebproxy](https://github.com/improbable-eng/grpc-web/tree/master/go/grpcwebproxy) by Improbable, but as a Caddy server type instead of a standalone Go application.
+The plugin is meant to serve the same purpose as [grpcwebproxy](https://github.com/improbable-eng/grpc-web/tree/master/go/grpcwebproxy) by Improbable, but as a Caddy server type instead of a standalone Go application.
 `grpcwebproxy` makes it possible for gRPC services to be consumed from browsers using the [gRPC-Web protocol](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md)
 
 
 ## Downloading
 
-The plugin will be available to download as a server type from [Caddy's Download page](https://caddyserver.com/download).
-Click on `Add plugins` option and scroll down to `Server Types` section where you can tick the `grpcwebproxy` box.
+The plugin will be available to download as a plugin from [Caddy's Download page](https://caddyserver.com/download).
+Click on `Add plugins` option and scroll down to the section where you can tick the `http.grpcwebproxy` box.
 
 To verify the plugin is part of your downloaded instance of Caddy, run Caddy with the `-plugins` command line flag:
 `caddy -plugins`
 
-`grpcwebproxy` should be listed under `Server types` along with `http` and any other server types also included.
+`http.grpcwebproxy` should be listed under `Other plugins` along with `http` and any other plugins also included.
 
-*Note, because the plugin is still in development it's not yet available on the Caddy download page*
-
-## Running
-
-To run the plugin, start Caddy with the `-type` command line flag:
-
-`caddy -type=grpcwebproxy`  
+*Note, because the plugin is still in development it's not yet available on the Caddy download page* 
 
 ## Roadmap/TODO 
 
-Have similar features to standalone grpcwebproxy (structured logging, monitoring, endoint debug info for requests and connections , TLS serving, secure (plaintext) and TLS gRPC backend connectivity) leveraging `Caddyfile` and Caddy's builtin TLS.
+Have similar features to standalone grpcwebproxy (structured logging, monitoring, endoint debug info for requests and connections ,  secure (plaintext) and TLS gRPC backend connectivity)
 
 ## Proposed Caddyfile 
 
 ```
-grpcweb.example.com 
-endpoint localhost:9090
+example.com 
+grpcwebproxy localhost:9090
 ```
 
-The first line `grpcweb.example.com` is the hostname/address of the site to serve.
-The second line is a directive called `endpoint` where the backend gRPC service endpoint address can be specified.
+The first line `example.com` is the hostname/address of the site to serve.
+The second line is a directive called `grpcwebproxy` where the backend gRPC service endpoint address (i.e `localhost:9090` as in the example) can be specified.
 
-This server type leverage the [tls directive](https://caddyserver.com/docs/tls) from the Caddy server and can be added to the server blocks as needed. 
 
 ## References ##
 
-[Writing a Plugin: Server Type](https://github.com/mholt/caddy/wiki/Writing-a-Plugin:-Server-Type)
+[Extending Caddy](https://github.com/mholt/caddy/wiki/Extending-Caddy)
+
+[Writing a Plugin: Directives](https://github.com/mholt/caddy/wiki/Writing-a-Plugin:-Directives)
 
 [Caddyfile](https://caddyserver.com/tutorial/caddyfile)
 
