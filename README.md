@@ -1,7 +1,5 @@
 # Caddy grpcwebproxy #
 
-*Note: This plugin is currently still a work in progress (WIP).*
-
 grpcwebproxy plugin for [Caddy Server](https://github.com/mholt/caddy)
 
 The plugin is meant to serve the same purpose as [grpcwebproxy](https://github.com/improbable-eng/grpc-web/tree/master/go/grpcwebproxy) by Improbable, but as a Caddy server type instead of a standalone Go application.
@@ -22,7 +20,7 @@ To verify the plugin is part of your downloaded instance of Caddy, run Caddy wit
 
 ## Roadmap/TODO 
 
-Have similar features to standalone grpcwebproxy (structured logging, monitoring, endoint debug info for requests and connections ,  secure (plaintext) and TLS gRPC backend connectivity)
+Inject [Go gRPC Middleware](https://github.com/grpc-ecosystem/go-grpc-middleware) into the underlying gRPC proxy using the Caddyfile.
 
 ## Proposed Caddyfile 
 
@@ -32,8 +30,35 @@ grpcwebproxy localhost:9090
 ```
 
 The first line `example.com` is the hostname/address of the site to serve.
-The second line is a directive called `grpcwebproxy` where the backend gRPC service endpoint address (i.e `localhost:9090` as in the example) can be specified.
+The second line is a directive called `grpcwebproxy` where the backend gRPC service endpoint address (i.e `localhost:9090` as in the example) can be specified. 
+(*Note: The above configuration will default to having TLS 1.2 to the backend gRPC service*)
 
+ ## Caddyfile syntax
+
+ ```
+ grpcwebproxy backend_addr {
+     backend_is_insecure 
+     backend_tls_noverify
+     backend_tls_ca_files path_to_ca_file1 path_to_ca_file2 
+ }
+ ```
+
+###  backend_is_insecure
+
+By default the proxy will connect to backend using TLS, however if the backend is serving in plaintext this option need to be added
+
+###  backend_tls_noverify
+
+By default the TLS to the backend will be verified, however if this is not the case then this option need to be added
+
+### backend_tls_ca_files 
+
+Paths (comma separated) to PEM certificate chains used for verification of backend certificates. If empty, host CA chain will be used.
+
+
+## Status 
+
+*This plugin is in BETA*
 
 ## References ##
 
