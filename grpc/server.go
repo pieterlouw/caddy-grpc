@@ -1,5 +1,17 @@
 package grpc
 
+import (
+	"context"
+	"crypto/tls"
+	"net/http"
+
+	"github.com/improbable-eng/grpc-web/go/grpcweb"
+	"github.com/mholt/caddy/caddyhttp/httpserver"
+	"github.com/mwitkow/grpc-proxy/proxy"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
+)
+
 type server struct {
 	backendAddr       string
 	next              httpserver.Handler
