@@ -1,20 +1,20 @@
-# Caddy grpcwebproxy #
+# Caddy grpc #
 
-grpcwebproxy plugin for [Caddy Server](https://github.com/mholt/caddy)
+grpc plugin for [Caddy Server](https://github.com/mholt/caddy)
 
-The plugin is meant to serve the same purpose as [grpcwebproxy](https://github.com/improbable-eng/grpc-web/tree/master/go/grpcwebproxy) by Improbable, but as a Caddy server type instead of a standalone Go application.
-`grpcwebproxy` makes it possible for gRPC services to be consumed from browsers using the [gRPC-Web protocol](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md)
+The plugin is meant to serve the same purpose as [grpcwebproxy](https://github.com/improbable-eng/grpc-web/tree/master/go/grpcwebproxy) by Improbable, but as a Caddy middleware plugin instead of a standalone Go application.
+`grpc` makes it possible for gRPC services to be consumed from browsers using the [gRPC-Web protocol](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md) and normal `gRPC` clients. (If the request is not a `grpc-web` request, it will be served as a normal `grpc` request)
 
 
 ## Downloading
 
 The plugin will be available to download as a plugin from [Caddy's Download page](https://caddyserver.com/download).
-Click on `Add plugins` option and scroll down to the section where you can tick the `http.grpcwebproxy` box.
+Click on `Add plugins` option and scroll down to the section where you can tick the `http.grpc` box.
 
 To verify the plugin is part of your downloaded instance of Caddy, run Caddy with the `-plugins` command line flag:
 `caddy -plugins`
 
-`http.grpcwebproxy` should be listed under `Other plugins` along with `http` and any other plugins also included.
+`http.grpc` should be listed under `Other plugins` along with `http` and any other plugins also included.
 
 *Note, because the plugin is still in development it's not yet available on the Caddy download page* 
 
@@ -26,17 +26,17 @@ Inject [Go gRPC Middleware](https://github.com/grpc-ecosystem/go-grpc-middleware
 
 ```
 example.com 
-grpcwebproxy localhost:9090
+grpc localhost:9090
 ```
 
 The first line `example.com` is the hostname/address of the site to serve.
-The second line is a directive called `grpcwebproxy` where the backend gRPC service endpoint address (i.e `localhost:9090` as in the example) can be specified. 
+The second line is a directive called `grpc` where the backend gRPC service endpoint address (i.e `localhost:9090` as in the example) can be specified. 
 (*Note: The above configuration will default to having TLS 1.2 to the backend gRPC service*)
 
  ## Caddyfile syntax
 
  ```
- grpcwebproxy backend_addr {
+ grpc backend_addr {
      backend_is_insecure 
      backend_tls_noverify
      backend_tls_ca_files path_to_ca_file1 path_to_ca_file2 
@@ -67,6 +67,8 @@ Paths (comma separated) to PEM certificate chains used for verification of backe
 [Writing a Plugin: Directives](https://github.com/mholt/caddy/wiki/Writing-a-Plugin:-Directives)
 
 [Caddyfile](https://caddyserver.com/tutorial/caddyfile)
+
+[gRPC](http://www.grpc.io/)
 
 [grpcwebproxy](https://github.com/improbable-eng/grpc-web/tree/master/go/grpcwebproxy)
 
