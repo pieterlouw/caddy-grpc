@@ -1,7 +1,6 @@
 package grpc
 
 import (
-	"context"
 	"crypto/tls"
 	"net/http"
 
@@ -10,6 +9,8 @@ import (
 	"github.com/mwitkow/grpc-proxy/proxy"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+
+	"golang.org/x/net/context"
 )
 
 type server struct {
