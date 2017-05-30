@@ -71,7 +71,9 @@ grpc localhost:9090
 ## grpc-web client implementations/examples
 
 [Javascript and Typescript](https://github.com/improbable-eng/grpc-web/tree/master/ts)
+
 [Vue.js](https://github.com/b3ntly/vue-gRPC)
+
 [GopherJS](https://github.com/johanbrandhorst/gopherjs-improbable-grpc-web-example)
 
 ## References ##
