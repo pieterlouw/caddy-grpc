@@ -59,10 +59,12 @@ Paths (comma separated) to PEM certificate chains used for verification of backe
 
 ## Caddyfile example with other directives
 
+```
 grpc.example.com 
 prometheus
 log
-grpc localhost:9090 
+grpc localhost:9090
+```
 
 ## Status 
 
