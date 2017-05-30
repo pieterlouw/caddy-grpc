@@ -2,9 +2,9 @@
 
 grpc plugin for [Caddy Server](https://github.com/mholt/caddy)
 
-The plugin is meant to serve the same purpose as [grpcwebproxy](https://github.com/improbable-eng/grpc-web/tree/master/go/grpcwebproxy) by Improbable, but as a Caddy middleware plugin instead of a standalone Go application.
 `grpc` makes it possible for gRPC services to be consumed from browsers using the [gRPC-Web protocol](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md) and normal `gRPC` clients. (If the request is not a `grpc-web` request, it will be served as a normal `grpc` request)
 
+The plugin is meant to serve the same purpose as [grpcwebproxy](https://github.com/improbable-eng/grpc-web/tree/master/go/grpcwebproxy) by Improbable, but as a Caddy middleware plugin instead of a standalone Go application.
 
 ## Downloading
 
