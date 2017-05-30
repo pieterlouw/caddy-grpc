@@ -20,7 +20,8 @@ To verify the plugin is part of your downloaded instance of Caddy, run Caddy wit
 
 ## Roadmap/TODO 
 
-Inject [Go gRPC Middleware](https://github.com/grpc-ecosystem/go-grpc-middleware) into the underlying gRPC proxy using the Caddyfile.
+- Inject [Go gRPC Middleware](https://github.com/grpc-ecosystem/go-grpc-middleware) into the underlying gRPC proxy using the Caddyfile.
+- Load balancing features
 
 ## Proposed Caddyfile 
 
@@ -56,9 +57,22 @@ By default the TLS to the backend will be verified, however if this is not the c
 Paths (comma separated) to PEM certificate chains used for verification of backend certificates. If empty, host CA chain will be used.
 
 
+## Caddyfile example with other directives
+
+grpc.example.com 
+prometheus
+log
+grpc localhost:9090 
+
 ## Status 
 
 *This plugin is in BETA*
+
+## grpc-web client implementations/examples
+
+[Javascript and Typescript](https://github.com/improbable-eng/grpc-web/tree/master/ts)
+[Vue.js](https://github.com/b3ntly/vue-gRPC)
+[GopherJS](https://github.com/johanbrandhorst/gopherjs-improbable-grpc-web-example)
 
 ## References ##
 
