@@ -37,8 +37,8 @@ func (s server) ServeHTTP(w http.ResponseWriter, r *http.Request) (int, error) {
 		return s.next.ServeHTTP(w, r)
 	}
 
-	director := func(ctx context.Context, fullMethodName string) (*grpc.ClientConn, error) {
-		return backendConn, nil
+	director := func(ctx context.Context, fullMethodName string) (context.Context, *grpc.ClientConn, error) {
+		return ctx, backendConn, nil
 	}
 	grpcServer := grpc.NewServer(
 		grpc.CustomCodec(proxy.Codec()), // needed for proxy to function.
