@@ -9,6 +9,7 @@ import (
 	"github.com/mwitkow/grpc-proxy/proxy"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/metadata"
 
 	"golang.org/x/net/context"
 )
@@ -37,8 +38,9 @@ func (s server) ServeHTTP(w http.ResponseWriter, r *http.Request) (int, error) {
 		return s.next.ServeHTTP(w, r)
 	}
 
-	director := func(ctx context.Context, fullMethodName string) (*grpc.ClientConn, error) {
-		return backendConn, nil
+	director := func(ctx context.Context, fullMethodName string) (context.Context, *grpc.ClientConn, error) {
+		md, _ := metadata.FromIncomingContext(ctx)
+		return metadata.NewOutgoingContext(ctx, md.Copy()), backendConn, nil
 	}
 	grpcServer := grpc.NewServer(
 		grpc.CustomCodec(proxy.Codec()), // needed for proxy to function.
