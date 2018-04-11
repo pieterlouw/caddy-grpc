@@ -6,7 +6,7 @@ import (
 
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"github.com/mholt/caddy/caddyhttp/httpserver"
-	"github.com/mwitkow/grpc-proxy/proxy"
+	"github.com/pieterlouw/caddy-grpc/proxy"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/metadata"
