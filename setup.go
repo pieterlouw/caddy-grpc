@@ -45,6 +45,10 @@ func setup(c *caddy.Controller) error {
 					return err
 				}
 				s.backendTLS = t
+			case "balancer":
+				if !c.Args(&s.balancerName) {
+					return c.Errf("balancer missing argument")
+				}
 			default:
 				return c.Errf("unknown property '%s'", c.Val())
 			}

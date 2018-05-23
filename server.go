@@ -20,13 +20,18 @@ type server struct {
 	backendIsInsecure bool
 	backendTLS        *tls.Config
 	wrappedGrpc       *grpcweb.WrappedGrpcServer
+	balancerName      string
 }
 
 // ServeHTTP satisfies the httpserver.Handler interface.
 func (s server) ServeHTTP(w http.ResponseWriter, r *http.Request) (int, error) {
 	//dial Backend
-	opt := []grpc.DialOption{}
-	opt = append(opt, grpc.WithCodec(proxy.Codec()))
+	opt := []grpc.DialOption{
+		grpc.WithCodec(proxy.Codec()),
+	}
+	if s.balancerName != "" {
+		opt = append(opt, grpc.WithBalancerName(s.balancerName))
+	}
 	if s.backendIsInsecure {
 		opt = append(opt, grpc.WithInsecure())
 	} else {

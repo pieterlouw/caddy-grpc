@@ -16,33 +16,34 @@ To verify the plugin is part of your downloaded instance of Caddy, run Caddy wit
 
 `http.grpc` should be listed under `Other plugins` along with `http` and any other plugins also included.
 
-*Note, because the plugin is still in development it's not yet available on the Caddy download page* 
+*Note, because the plugin is still in development it's not yet available on the Caddy download page*
 
-## Roadmap/TODO 
+## Roadmap/TODO
 
 - Inject [Go gRPC Middleware](https://github.com/grpc-ecosystem/go-grpc-middleware) into the underlying gRPC proxy using the Caddyfile.
 - Load balancing features
 
-## Proposed Caddyfile 
+## Proposed Caddyfile
 
 ```
-example.com 
+example.com
 grpc localhost:9090
 ```
 
 The first line `example.com` is the hostname/address of the site to serve.
-The second line is a directive called `grpc` where the backend gRPC service endpoint address (i.e `localhost:9090` as in the example) can be specified. 
+The second line is a directive called `grpc` where the backend gRPC service endpoint address (i.e `localhost:9090` as in the example) can be specified.
 (*Note: The above configuration will default to having TLS 1.2 to the backend gRPC service*)
 
- ## Caddyfile syntax
+## Caddyfile syntax
 
- ```
- grpc backend_addr {
-     backend_is_insecure 
-     backend_tls_noverify
-     backend_tls_ca_files path_to_ca_file1 path_to_ca_file2 
- }
- ```
+```
+grpc backend_addr {
+    backend_is_insecure
+    backend_tls_noverify
+    backend_tls_ca_files path_to_ca_file1 path_to_ca_file2
+    balancer load_balancer_name
+}
+```
 
 ###  backend_is_insecure
 
@@ -52,21 +53,29 @@ By default the proxy will connect to backend using TLS, however if the backend i
 
 By default the TLS to the backend will be verified, however if this is not the case then this option need to be added
 
-### backend_tls_ca_files 
+### backend_tls_ca_files
 
 Paths (comma separated) to PEM certificate chains used for verification of backend certificates. If empty, host CA chain will be used.
 
+### balancer
+
+This takes a GRPC load balancer name. Currently the only options are
+`round_robin` and `pick_first`. It defaults to `pick_first`.
+
+To use DNS load balancing, you'll need to prefix the backend address with `dns://`.
+
+See: https://github.com/grpc/grpc/blob/master/doc/naming.md#name-syntax, https://github.com/grpc/grpc/blob/master/doc/load-balancing.md
 
 ## Caddyfile example with other directives
 
 ```
-grpc.example.com 
+grpc.example.com
 prometheus
 log
 grpc localhost:9090
 ```
 
-## Status 
+## Status
 
 *This plugin is in BETA*
 
