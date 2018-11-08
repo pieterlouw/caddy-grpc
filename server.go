@@ -3,19 +3,20 @@ package grpc
 import (
 	"crypto/tls"
 	"net/http"
+	"strings"
 
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"github.com/mholt/caddy/caddyhttp/httpserver"
 	"github.com/pieterlouw/caddy-grpc/proxy"
+	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/metadata"
-
-	"golang.org/x/net/context"
 )
 
 type server struct {
 	backendAddr       string
+	path              string
 	next              httpserver.Handler
 	backendIsInsecure bool
 	backendTLS        *tls.Config
@@ -24,6 +25,10 @@ type server struct {
 
 // ServeHTTP satisfies the httpserver.Handler interface.
 func (s server) ServeHTTP(w http.ResponseWriter, r *http.Request) (int, error) {
+	if s.path != "" && !strings.HasPrefix(r.URL.Path, s.path) {
+		return s.next.ServeHTTP(w, r)
+	}
+
 	//dial Backend
 	opt := []grpc.DialOption{}
 	opt = append(opt, grpc.WithCodec(proxy.Codec()))
