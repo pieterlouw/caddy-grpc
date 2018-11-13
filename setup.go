@@ -27,7 +27,7 @@ func setup(c *caddy.Controller) error {
 		case len(args) == 1:
 			s.backendAddr = args[0]
 		case len(args) == 2:
-			s.path, s.backendAddr = args[0], args[1]
+			s.prefix, s.backendAddr = args[0], args[1]
 		default:
 			return c.ArgErr()
 		}

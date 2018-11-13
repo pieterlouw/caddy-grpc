@@ -16,7 +16,7 @@ import (
 
 type server struct {
 	backendAddr       string
-	path              string
+	prefix            string
 	next              httpserver.Handler
 	backendIsInsecure bool
 	backendTLS        *tls.Config
@@ -25,7 +25,7 @@ type server struct {
 
 // ServeHTTP satisfies the httpserver.Handler interface.
 func (s server) ServeHTTP(w http.ResponseWriter, r *http.Request) (int, error) {
-	if s.path != "" && !strings.HasPrefix(r.URL.Path, s.path) {
+	if s.prefix != "" && !strings.HasPrefix(r.URL.Path, s.prefix) {
 		return s.next.ServeHTTP(w, r)
 	}
 
