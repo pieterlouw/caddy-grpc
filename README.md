@@ -1,6 +1,6 @@
 # Caddy grpc #
 
-grpc plugin for [Caddy Server](https://github.com/mholt/caddy)
+grpc plugin for [Caddy Server](https://github.com/caddyserver/caddy)
 
 `grpc` makes it possible for gRPC services to be consumed from browsers using the [gRPC-Web protocol](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md) and normal `gRPC` clients. (If the request is not a `grpc-web` request, it will be served as a normal `grpc` request)
 
@@ -80,9 +80,9 @@ grpc localhost:9090
 
 ## References ##
 
-[Extending Caddy](https://github.com/mholt/caddy/wiki/Extending-Caddy)
+[Extending Caddy](https://github.com/caddyserver/caddy/wiki/Extending-Caddy)
 
-[Writing a Plugin: Directives](https://github.com/mholt/caddy/wiki/Writing-a-Plugin:-Directives)
+[Writing a Plugin: Directives](https://github.com/caddyserver/caddy/wiki/Writing-a-Plugin:-Directives)
 
 [Caddyfile](https://caddyserver.com/tutorial/caddyfile)
 
