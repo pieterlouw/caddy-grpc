@@ -44,6 +44,10 @@ The second line is a directive called `grpc` where the backend gRPC service endp
  }
  ```
 
+ ```
+ grpc /prefix backend_addr
+ ```
+
 ###  backend_is_insecure
 
 By default the proxy will connect to backend using TLS, however if the backend is serving in plaintext this option need to be added

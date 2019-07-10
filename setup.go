@@ -22,7 +22,13 @@ func setup(c *caddy.Controller) error {
 	for c.Next() {
 		var s server
 
-		if !c.Args(&s.backendAddr) { //loads next argument into backendAddr and fail if none specified
+		args := c.RemainingArgs()
+		switch {
+		case len(args) == 1:
+			s.backendAddr = args[0]
+		case len(args) == 2:
+			s.prefix, s.backendAddr = args[0], args[1]
+		default:
 			return c.ArgErr()
 		}
 
