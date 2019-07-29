@@ -19,7 +19,6 @@ type server struct {
 	next              httpserver.Handler
 	backendIsInsecure bool
 	backendTLS        *tls.Config
-	wrappedGrpc       *grpcweb.WrappedGrpcServer
 }
 
 // ServeHTTP satisfies the httpserver.Handler interface.
@@ -59,6 +58,7 @@ func (s server) ServeHTTP(w http.ResponseWriter, r *http.Request) (int, error) {
 	wrappedGrpc := grpcweb.WrapServer(grpcServer, grpcweb.WithCorsForRegisteredEndpointsOnly(false))
 	wrappedGrpc.ServeHTTP(w, r)
 
+	backendConn.Close()
 	return 0, nil
 }
 
